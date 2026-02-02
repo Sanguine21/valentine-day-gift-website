@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For my girls❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{margin:0;min-height:100vh;background:#fde6ec;overflow-x:hidden}
+
+/* petals */
+.petal{position:fixed;top:-20px;width:12px;height:12px;background:pink;border-radius:50% 50% 50% 0;transform:rotate(45deg);opacity:.8;animation:fall linear infinite;z-index:0}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+
+.card{max-width:620px;margin:80px auto;background:#ffc0cb;border-radius:22px;padding:35px 25px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,.15);position:relative;z-index:1}
+
+.teddy{width:130px;animation:float 3s ease-in-out infinite;margin-bottom:15px}
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-14px)}100%{transform:translateY(0)}}
+
+h1,h2{color:#4a1c2f;margin:10px 0}
+p{color:#5a2a3c;font-size:16px;line-height:1.6}
+
+button{padding:12px 30px;font-size:16px;border-radius:25px;border:none;cursor:pointer;margin:6px}
+.yes{background:red;color:#fff}
+.no{background:royalblue;color:#fff}
+
+.gifts{display:flex;justify-content:center;gap:16px;margin-top:22px;flex-wrap:wrap}
+.gift{background:#fff;padding:16px 20px;border-radius:16px;cursor:pointer;box-shadow:0 6px 15px rgba(0,0,0,.15)}
+
+.heart{width:120px;margin:15px auto}
+
+.polaroids{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:15px}
+.polaroids img{width:100%;border-radius:10px;background:#fff;padding:6px}
+
+video{width:90%;max-width:320px;border-radius:15px;margin-top:15px}
+audio{display:none}
+</style>
+</head>
+<body>
+<audio id="bgMusic" src="bg-music.mp3" loop></audio>
+<div id="app"></div>
+
+<script>
+const app=document.getElementById('app');
+let noCount=0;
+let quizIndex=0;
+
+const noTexts=[
+"Hey… don’t break my heart so easily, my love 🥺",
+"My girl, my days don’t feel complete without you 💞",
+"I already chose you in my heart, sweetheart ❤️",
+"Please say yes… my heart only wants you 🫶"
+];
+
+const quizzes=[
+  {
+    q:"What makes my heart feel safest?",
+    options:["Being alone","When you hold my hand","Sleeping","Listening to music"],
+    correct:1,
+    msg:"With you, my love, my heart finally feels at home 💖"
+  },
+  {
+    q:"When I imagine my future, what I see?",
+    options:["A random life","Only dreams","life with my girl ","without you"],
+    correct:2,
+    msg:"You are not part of my future — you ARE my future 🫶"
+  },
+  {
+    q:"What scares me the most?",
+    options:["Darkness","Silence","Losing you ","Nothing"],
+    correct:2,
+    msg:"Because life without you would lose all its colors 🎨❤️"
+  },
+  {
+    q:"What do I want to do forever with you?",
+    options:["Travel only","Talk sometimes","Grow, laugh, cry, and love together ","chat"],
+    correct:2,
+    msg:"I don’t want perfect days — I want real days, with you 🥰"
+  },
+  {
+    q:"Who owns my heart completely?",
+    options:["Me","Time","You ","The world"],
+    correct:2,
+    msg:"I gave you my heart long ago, my darling sweetheart 💓"
+  }
+];
+
+function petals(){
+  for(let i=0;i<25;i++){
+    const p=document.createElement('div');
+    p.className='petal';
+    p.style.left=Math.random()*100+'vw';
+    p.style.animationDuration=(5+Math.random()*6)+'s';
+    document.body.appendChild(p);
+  }
+}
+
+function mainPage(){
+  noCount=0;
+  app.innerHTML=`
+  <div class='card'>
+    <img src='teddy.gif' class='teddy'>
+    <h1>Will you be mine 🥺?</h1>
+    <p>Subhangi, my darling sweetheart, my love — I promise to annoy you, love you, and choose you forever. This is me, standing with my whole heart in my hands… hoping you’ll take it.💖
+So… before my heart explodes, will you please say yes? 🥺❤️</p>
+    <button class='yes' onclick='yesPage()'>YES</button>
+    <button class='no' onclick='noPage()'>NO</button>
+  </div>`;
+}
+
+function noPage(){
+  noCount++;
+  const size=16+noCount*4;
+  app.innerHTML=`
+  <div class='card'>
+    <img src='teddy4.gif' class='teddy'>
+    <h2>Think again 😢</h2>
+    <p>${noTexts[Math.min(noCount-1,noTexts.length-1)]}</p>
+    <button class='yes' style='font-size:${size}px' onclick='yesPage()'>YES</button>
+    <button class='no' onclick='noPage()'>NO</button>
+  </div>`;
+}
+
+function yesPage(){
+  const music=document.getElementById('bgMusic');
+  if(music) music.play().catch(()=>{});
+  app.innerHTML=`
+  <div class='card'>
+    <img src='teddy1.gif' class='teddy'>
+    <h1>Happy Valentine’s Day Baby 💍</h1>
+    <p>You just made me the luckiest girl alive 💖<br>My love, my sweetheart, my girl — my heart finally found its home.<br>
+Thank you for choosing me, even after seeing every version of me.💗
+From this moment on, it’s you and me… always.💖</p>
+    <button class='yes' onclick='giftPage()'>SEE MY GIFTS</button>
+  </div>`;
+}
+
+function giftPage(){
+  app.innerHTML=`
+  <div class='card'>
+    <img src='teddy2.gif' class='teddy'>
+    <h2>Something for You 💝</h2>
+    <div class='gifts'>
+      <div class='gift' onclick='quizPage()'>🎁 Gift 1</div>
+      <div class='gift' onclick='letterPage()'>💌 Gift 2</div>
+      <div class='gift' onclick='photoPage()'>📸 Gift 3</div>
+    </div>
+    <br>
+    <button class='yes' onclick='finalPage()'>FINALLY ❤️</button>
+  </div>`;
+}
+
+function quizPage(){
+  quizIndex=0;
+  showQuiz();
+}
+
+function showQuiz(){
+  const q=quizzes[quizIndex];
+  app.innerHTML=`
+  <div class='card'>
+    <img src='teddy2.gif' class='teddy'>
+    <h2>Quiz for you 😘</h2>
+    <p>${q.q}</p>
+    <div id='options'>${q.options.map((o,i)=>`<button onclick='answer(${i})'>${o}</button>`).join('')}</div>
+    <div id='result'></div>
+  </div>`;
+}
+
+function answer(i){
+  const q=quizzes[quizIndex];
+  const res=document.getElementById('result');
+  if(!res) return;
+  if(i===q.correct){
+    res.innerHTML=`<img src='heart.gif' class='heart'><h2>Correct ❤️</h2><p style='margin:10px 0;color:#4a1c2f'>${q.msg}</p><button class='yes' onclick='nextQuiz()'>NEXT</button>`;
+  }else{
+    res.innerHTML=`<img src='heart-broken.gif' class='heart'><h2>Oops 💔</h2>`;
+  }
+}
+
+function nextQuiz(){
+  quizIndex++;
+  if(quizIndex<quizzes.length){
+    showQuiz();
+  }else{
+    giftPage();
+  }
+}
+
+function letterPage(){
+  app.innerHTML=`
+  <div class='card'>
+    <img src='teddy2.gif' class='teddy'>
+    <h2>A Letter For You 🥺</h2>
+    <p>My darling sweetheart, my love, my girl💓 —<br>
+    You are my peace, my chaos, my forever. Loving you is effortless and choosing you is my favorite decision every day.💝 I promise to stand by you, hold you, and love you endlessly 💞<br>
+You are my calm in every storm.💓
+You feel like home in a world that never stops moving.💖
+I never had to pretend with you, and that’s why my heart fell so deeply.💓
+I don’t just love you — I understand you.❣️
+</p>
+    <button class='yes' onclick='giftPage()'>BACK</button>
+  </div>`;
+}
+
+function photoPage(){
+  app.innerHTML=`
+  <div class='card'>
+    <img src='teddy2.gif' class='teddy'>
+    <h2>Look at this cutie 😍</h2>
+    <div class='polaroids'>
+      <img src='memory1.jpg'>
+      <img src='memory2.jpg'>
+      <img src='memory3.jpg'>
+      <img src='memory4.jpg'>
+      <img src='memory5.jpg'>
+      <img src='memory6.jpg'>
+    </div>
+    <button class='no' onclick='giftPage()'>BACK</button>
+  </div>`;
+}
+
+function finalPage(){
+  app.innerHTML=`
+  <div class='card'>
+    <img src='teddy1.gif' class='teddy'>
+    <h2>You are my forever ❤️</h2>
+
+    <p>I promise to protect our friendship even while loving you with my whole heart.💓
+I love you, my girl.😘 Today, tomorrow, and every lifetime — it’s you.💗</p>
+    <video src='final-video.mp4' controls></video>
+  </div>`;
+}
+
+petals();
+mainPage();
+</script>
+</body>
+</html>
